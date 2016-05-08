@@ -1,0 +1,13 @@
+.main-content-left {
+  width: 30%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.main-content-right {
+  width: 70%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
