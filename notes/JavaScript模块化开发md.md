@@ -92,6 +92,10 @@ CommonJS中，Modules风格的模块定义有可能是同步加载的，必须�
 ###官方文档[AMD](https://github.com/amdjs)
 Asynchronous Module Definition，异步模块定义，所有模块异步加载，模块加载不堵塞其他语句的执行，所有依赖某些模块的语句均放在回调函数中。**也可以说，AMD是专门为浏览器中的JavaScript环境设计的规范**
 
+**The dependencies must be resolved prior to the execution of the module factory function, and the resolved values should be passed as arguments to the factory function with argument positions corresponding to indexes in the dependencies array.**
+
+AMD规范中的模块的加载均是同时进行的，但是在所有依赖的模块加载和执行完成后执行其他代码，相当于所有require都被hoist了，且模块的执行顺序不保证；而CMD规范中，并行加载所有依赖的模块，但是按需执行，在真正require的时候才解析执行，同时按照模块在代码中的require顺序执行。
+
 AMD定义了define和require全局标识符，可以自己实现，其中自定义的define函数需要包含一个属性amd，是一个对象，即define.amd = {}
 
 define(id?, dependencies?, factory)
