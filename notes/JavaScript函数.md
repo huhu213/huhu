@@ -127,6 +127,52 @@ ECMAScript5中规范了caller属性，用来指向调用当前函数的函数。
 >     3.除非显示地返回值，则创建的新对象就作为构造函数的返回值
 
 
+##私有变量
+
+JavaScript中没有私有成员的概念，对象的属性是共有的。但是在函数内部的变量由于只有函数内部可以访问，因此函数内定义的变量都可以看做是私有变量，包括函数的参数、局部变量和函数内部定义的其他函数。
+
+>     function Person(name) {
+>         this.get = function() {
+>             return name;
+>         }
+>         this.set(value) {
+>             name = value;
+>         }
+>     }
+> 
+>     var p1 = new Person("p1");
+>     alert(p1.get());//p1
+>     var p2 = new Person("p2");
+>     alert(p2.get());//p2
+>     p2.set("p3");
+>     alert(p2.get());//p3
+>     alert(p1.get());//p1
+
+以上代码通过构造函数新建了两个Person对象，它们均有自己的get和set方法，每个实例对象之间互不影响。
+
+>     (function() {
+>         var name = "";
+>         Person = function(value) {
+>             name = value;
+>         }//Person是全局对象，通过匿名函数构造，每一次构造豆浆修改Person对象的值
+>         Person.prototype.get() {
+>             return name;
+>         }
+>         Person.protype.set(value) {
+>             name = value;
+>         }
+>     })();
+> 
+>  以上这段立即执行的匿名函数创建了一个私有作用域，它有一个私有变量name，通过构造函数创建一个全局对象Person
+> 
+>     var p1 = new Person("p1");
+>     alert(p1.get());//p1
+>     var p2 = new Person("p2");
+>     alert(p2.get());//p@
+>     alert(p1.get());??P@
+
+
+
 
 
 
